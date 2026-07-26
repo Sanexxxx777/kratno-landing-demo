@@ -13,14 +13,14 @@
     if (batch.length && !flush) {
       flush = requestAnimationFrame(function () {
         batch.forEach(function (el, i) {
-          el.style.transitionDelay = reduce ? '0s' : (i * 90) + 'ms';
+          el.style.transitionDelay = reduce ? '0s' : (i * 55) + 'ms';
           el.classList.add('in');
         });
         batch = [];
         flush = null;
       });
     }
-  }, { threshold: 0.15 });
+  }, { threshold: 0.05, rootMargin: '0px 0px 220px 0px' });
   document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
   // number counters
@@ -32,7 +32,7 @@
     var comma = raw.indexOf(',') > -1;
     var target = parseFloat(raw.replace(',', '.'));
     var decimals = (raw.split(/[.,]/)[1] || '').length;
-    var start = null, dur = 1000;
+    var start = null, dur = 650;
     function frame(ts) {
       if (!start) start = ts;
       var p = Math.min((ts - start) / dur, 1);
@@ -55,7 +55,7 @@
           cio.unobserve(e.target);
         }
       });
-    }, { threshold: 0.6 });
+    }, { threshold: 0.2, rootMargin: '0px 0px 220px 0px' });
     document.querySelectorAll('.stat b, .hero-chip b, .case-card__nums b, .case-nums b, .nums b').forEach(function (el) { cio.observe(el); });
   }
 
